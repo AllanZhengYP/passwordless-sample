@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { SignUpWithEmailAndMagicLinkInput, SignUpWithEmailAndOTPInput, signUp } from 'aws-amplify/auth';
+import {  signUp } from 'aws-amplify/auth';
 
 function SignUp() {
   const usernameFieldRef = useRef<HTMLInputElement>(null);

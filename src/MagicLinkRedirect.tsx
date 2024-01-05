@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { confirmSignIn } from "aws-amplify/auth";
 
 function MagicLinkRedirect() {
   const { code } = useParams<"code">();
+  const navigate = useNavigate();
 
   const handleConfirmSignIn = async () => {
     if (code) {
@@ -11,8 +12,9 @@ function MagicLinkRedirect() {
           challengeResponse: code,
         });
         console.log('❤️❤️❤️', authSession);
+        navigate("/");
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };

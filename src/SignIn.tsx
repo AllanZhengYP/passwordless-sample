@@ -1,15 +1,16 @@
 
 import { signIn } from 'aws-amplify/auth';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './App.css'
 
 function SignIn() {
-  const usernameFieldRef = useRef<HTMLInputElement>(null);
+  const emailFieldRef = useRef<HTMLInputElement>(null);
+  const [showCheckEmailMessage, setShowCheckEmailMessage] = useState<boolean>(false);
 
   const handlePasswordlessLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const username = usernameFieldRef.current?.value;
+    const username = emailFieldRef.current?.value;
     if (!username) {
       return;
     }
@@ -22,6 +23,7 @@ function SignIn() {
           method: 'MAGIC_LINK'
         }
       });
+      setShowCheckEmailMessage(true);
       console.log(authSession);
     } catch (error) {
       console.log(error);
@@ -35,9 +37,9 @@ function SignIn() {
         <form onSubmit={handlePasswordlessLogin}>
           <label>Username:</label>
           <input
-            type="text"
-            ref={usernameFieldRef}
-            placeholder="Username"
+            type='email'
+            ref={emailFieldRef}
+            placeholder="email"
             required
           />
           <br />
@@ -45,6 +47,9 @@ function SignIn() {
             Sign In With Email and MAGIC_LINK
           </button>
         </form>
+        <div className="card" hidden = {!showCheckEmailMessage}>
+          <p>Check your email for a link to sign in.</p>
+        </div>
       </div>
     </>
   )
