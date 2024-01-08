@@ -4,11 +4,10 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import SignUp from "./SignUp.tsx";
-import SignIn from "./SignIn.tsx";
 import MagicLinkRedirect from "./MagicLinkRedirect.tsx";
 import AuthenticatedApp from "./AuthenticatedApp.tsx";
-import AuthProvider from "./providers/AuthProvider.tsx";
+import AuthProvider from "./components/AuthProvider.tsx";
+import Authenticator from "./components/Authenticator/Authenticator.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-up",
-        element: <SignUp />,
+        element: <Authenticator selected="SIGN_UP" />,
       },
       {
         path: "sign-in",
-        element: <SignIn />,
+        element: <Authenticator selected="SIGN_IN" />,
       },
       {
         path: "sign-in-redirect",

@@ -1,7 +1,6 @@
 
 import { signIn } from 'aws-amplify/auth';
 import { useRef, useState } from 'react';
-import './App.css'
 
 function SignIn() {
   const emailFieldRef = useRef<HTMLInputElement>(null);
